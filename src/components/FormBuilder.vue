@@ -56,7 +56,7 @@
           </div>
           <div
             class="row"
-            v-if="row.select == 3 || row.select == 4 || row.select == 5"
+            v-if="row.select === 'Check box' || row.select == 'Radio button' || row.select == 'Drop down'"
           >
             <div>
               <div
@@ -124,17 +124,17 @@ export default {
   data() {
     return {
       options: [
-        { label: "Text", value: 1 },
-        { label: "Numeric", value: 2 },
-        { label: "Check box", value: 3 },
-        { label: "Radio button", value: 4 },
-        { label: "Drop down", value: 5 },
-        { label: "Image", value: 6 },
-        { label: "Date", value: 7 }
+        { label: "Text", value: "Text" },
+        { label: "Numeric", value: "Numeric" },
+        { label: "Check box", value: "Check box" },
+        { label: "Radio button", value: "Radio button" },
+        { label: "Drop down", value: "Drop down" },
+        { label: "Image", value: "Image" },
+        { label: "Date", value: "Date" }
       ],
       rows: [
         {
-          select: 1,
+          select: "Text",
           name: "",
           check: false,
           subrows: [{ answer: "" }],
