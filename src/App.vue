@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/tripleform">Tripleform</router-link>
+      <router-link to="/tripleform">Tripleform</router-link> |
+      <router-link to="/formbuilder">Form Builder</router-link>
     </div>
     <router-view />
   </div>
@@ -11,7 +12,6 @@
 
 <style>
 #app {
- 
   text-align: center;
   color: #2c3e50;
 }

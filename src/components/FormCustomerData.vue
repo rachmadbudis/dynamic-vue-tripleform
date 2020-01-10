@@ -46,7 +46,7 @@ export default {
           const q = this.questionsData.filter(
             item => item.key === question.followUpKey
           );
-          if (q  === 'undefined') {
+          if (q  === "undefined") {
             q[0].showQuestion = true;
             this.$log.info(q);
           }
@@ -54,7 +54,7 @@ export default {
           const q = this.questionsData.filter(
             item => item.key === question.followUpKey
           );
-          if (q  === 'undefined') {
+          if (q  === "undefined") {
             q[0].showQuestion = false;
           }
         }

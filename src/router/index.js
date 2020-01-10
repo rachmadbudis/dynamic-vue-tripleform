@@ -23,6 +23,10 @@ const routes = [
     path: "/tripleform",
     name: "tripleform",
     component: () => import("../components/Tripleform.vue")
+  },{
+    path: "/formbuilder",
+    name: "formbuilder",
+    component: () => import("../components/FormBuilder.vue")
   },
 ];
 
