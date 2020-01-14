@@ -2,7 +2,7 @@
   <div id="formbuilder" class="container">
     <div>Heloo Form Builder</div>
     <div class="col-lg-12">
-      <div class="row  form-row" v-for="(row, index) in rows" :key="index">
+      <div class="row  form-row" v-for="(row, index) in questions" :key="index">
         <div class="col-lg-12">
           <div class="row">
             <div class="col-lg-12 row">
@@ -21,7 +21,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Question"
-                  v-model="row.name"
+                  v-model="row.key"
                 />
               </div>
               <div class="col-lg-2">
@@ -30,9 +30,9 @@
               <div class="col-lg-2">
                 <select
                   name=""
-                  id="parentquestion"
+                  id="parentKey"
                   class="form-control"
-                  v-model="row.parentquestion"
+                  v-model="row.parentKey"
                 >
                   <option value=""></option>
                   <option
@@ -54,14 +54,47 @@
               </div>
             </div>
           </div>
+          <div class="row translation-div" v-if="showTranslation(row)">
+            <div class="col-lg-4 row">
+              <label class="text-center" for=""> NL Translation</label>
+              <input
+                class="form-control"
+                v-model="row.key_nl"
+                type="text"
+                placeholder="NL Translations"
+              />
+            </div>
+            <div class="col-lg-4 row">
+              <label for=""> AR Translation</label>
+              <input
+                class="form-control"
+                v-model="row.key_ar"
+                type="text"
+                placeholder="AR Translations"
+              />
+            </div>
+            <div class="col-lg-4 row">
+              <label for=""> EN Translation</label>
+              <input
+                class="form-control"
+                v-model="row.key_en"
+                type="text"
+                placeholder="EN Translations"
+              />
+            </div>
+          </div>
           <div
             class="row"
-            v-if="row.select === 'Check box' || row.select == 'Radio button' || row.select == 'Drop down'"
+            v-if="
+              row.select === 'Check box' ||
+                row.select == 'Radio button' ||
+                row.select == 'Drop down'
+            "
           >
             <div>
               <div
                 class="row subrow"
-                v-for="(subrow, ind) in row.subrows"
+                v-for="(subrow, ind) in row.options"
                 :key="ind"
               >
                 <div class="col-lg-12 row">
@@ -109,13 +142,14 @@
         </div>
       </div>
       <!-- <div><pre><code>{{rows}}</code></pre></div> -->
-      
     </div>
   </div>
 </template>
 
 <script>
 import Rules from "./FormRules";
+import { required } from "vuelidate/lib/validators";
+
 export default {
   name: "formbuilder",
   components: {
@@ -129,55 +163,77 @@ export default {
         { label: "Check box", value: "Check box" },
         { label: "Radio button", value: "Radio button" },
         { label: "Drop down", value: "Drop down" },
-        { label: "Image", value: "Image" },
         { label: "Date", value: "Date" }
       ],
-      rows: [
+      questions: [
         {
           select: "Text",
-          name: "",
-          check: false,
-          subrows: [{ answer: "" }],
-          parentquestion: "",
-          rules: {}
+          key: "",
+          options: [{ answer: "" }],
+          parentKey: "",
+          rules: null,
+          key_ar: "",
+          key_en: "",
+          key_nl: ""
         }
       ]
     };
   },
   methods: {
     addRow: function() {
-      this.rows.push({
-        select: 1,
-        name: "",
-        check: false,
-        parentquestion: "",
-        rules: {},
-        subrows: [{ answer: "" }]
+      this.questions.push({
+        select: "Text",
+        key: "",
+        parentKey: "",
+        rules: null,
+        options: [{ answer: "" }],
+        key_ar: "",
+        key_en: "",
+        key_nl: ""
       });
     },
     deleteRow: function(index) {
-      this.rows.splice(index, 1);
+      this.questions.splice(index, 1);
     },
     addSubRow: function(row) {
-      row.subrows.push({ answer: "" });
+      row.options.push({ answer: "" });
     },
     deleteSubrow: function(row, ind) {
-      row.subrows.splice(ind, 1);
+      row.options.splice(ind, 1);
     },
     getParentQuestion(row) {
-      const filtered = this.rows.filter(function(item) {
-        return item.name !== row.name;
+      const filtered = this.questions.filter(function(item) {
+        return item.key !== row.key;
       });
       return filtered;
     },
     showRules(row) {
-      return row.parentquestion !== "";
+      return row.parentKey !== "";
     },
     processRule(rules) {
       Object.assign(this.form, rules);
+    },
+    showTranslation(row) {
+      if (row.key !== "") {
+        return true;
+      }
     }
   },
-  computed: {}
+  validations: {
+    questions: [
+      {
+        select: {
+          required
+        },
+        key: {
+          required
+        },
+        key_en:{
+          required
+        }
+      }
+    ]
+  }
 };
 </script>
 <style>
@@ -190,5 +246,12 @@ export default {
 .subrow {
   margin: 5px;
   padding: 5px;
+}
+.text-center {
+  text-align: center;
+}
+.translation-div {
+  margin-top: 15px;
+  margin-left: 15px;
 }
 </style>

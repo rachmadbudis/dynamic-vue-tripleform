@@ -5,6 +5,7 @@
       :is="currentStep"
       :questionsData="questions"
     ></component>
+
     <div class="progress-bar">
       <div :style="`width: ${progress}%;`"></div>
     </div>
@@ -37,117 +38,136 @@ export default {
       questions: [
         {
           key: "com.rcs.question.procedural.smartflow",
-          rules: { message: "8 characters minimum.", regex: /.{7,}/ },
-          followUpKey: "",
+          key_ar:"",
+          key_en:"",
+          key_nl:"",
+          rules: { regex: null },
+          parentKey: "",
           type: "text",
           values: "",
           options: [],
-          showQuestion: true
         },
         {
           key: "com.rcs.question.procedural.dateApplied",
-          rules: { message: "8 characters minimum.", regex: /.{8,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "Date",
           values: "",
+          options: [],
           showQuestion: false
         },
         {
           key: "com.rcs.question.procedural.locationApplied",
-          rules: { message: "8 characters minimum.", regex: /.{1,}/ },
-          followUpKey: "",
-          type: "text",
-          values: "",
-          showQuestion: true
-        },
-        {
-          key: "com.rcs.question.procedural.dateAdded",
-          rules: { message: "8 characters minimum.", regex: /.{8,}/ },
-          followUpKey: "",
-          type: "Date",
-          values: "",
-          showQuestion: true
-        },
-        {
-          key: "com.rcs.question.procedural.locationAdded",
-          rules: { message: "8 characters minimum.", regex: /.{1,}/ },
-          followUpKey: "",
-          type: "text",
-          values: "",
-          showQuestion: true
-        },
-        {
-          key: "com.rcs.question.procedural.dateInterview",
-          rules: { message: "8 characters minimum.", regex: /.{8,}/ },
-          followUpKey: "",
-          type: "Date",
-          values: "",
-          showQuestion: true
-        },
-        {
-          key: "com.rcs.question.procedural.locationInterview",
-          rules: { message: "8 characters minimum.", regex: /.{1,}/ },
-          followUpKey: "",
-          type: "text",
-          values: "",
-          showQuestion: true
-        },
-        {
-          key: "com.rcs.question.personal.surname",
-          rules: { message: "8 characters minimum.", regex: /.{7,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "text",
           values: "",
           options: [],
-          showQuestion: true
+        },
+        {
+          key: "com.rcs.question.procedural.dateAdded",
+          rules: { regex: /^YES$/ },
+          parentKey: "com.rcs.question.procedural.locationApplied",
+          type: "Date",
+          values: "",
+          options: [],
+        },
+        {
+          key: "com.rcs.question.procedural.locationAdded",
+          rules: { regex: null },
+          parentKey: "",
+          type: "text",
+          values: "",
+          options: [],
+        },
+        {
+          key: "com.rcs.question.procedural.dateInterview",
+          rules: { regex: null },
+          parentKey: "",
+          type: "Date",
+          values: "",
+          options: [],
+        },
+        {
+          key: "com.rcs.question.procedural.locationInterview",
+          rules: { regex: null },
+          parentKey: "",
+          type: "text",
+          values: "",
+          options: [],
+        },
+        {
+          key: "com.rcs.question.procedural.optional",
+          rules: { regex: null },
+          parentKey: "",
+          type: "Drop down",
+          values: "",
+          options: ["yes", "no"],
+        },
+        {
+          key: "com.rcs.question.procedural.showhide",
+          rules: { regex: /^yes$/ },
+          parentKey: "com.rcs.question.procedural.optional",
+          type: "text",
+          values: "",
+          options: [],
+        },
+        {
+          key: "com.rcs.question.personal.surname",
+          rules: { regex: null },
+          parentKey: "",
+          type: "text",
+          values: "",
+          options: [],
         },
         {
           key: "com.rcs.question.personal.name",
-          rules: { message: "8 characters minimum.", regex: /.{8,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "text",
           values: "",
+          options: [],
           showQuestion: false
         },
         {
           key: "com.rcs.question.personal.dateOfBirth",
-          rules: { message: "8 characters minimum.", regex: /.{1,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "Date",
           values: "",
-          showQuestion: true
+          options: [],
         },
         {
           key: "com.rcs.question.personal.nationality",
-          rules: { message: "8 characters minimum.", regex: /.{8,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "text",
           values: "",
-          showQuestion: true
+          options: [],
         },
         {
           key: "com.rcs.question.personal.placeOfBirth",
-          rules: { message: "8 characters minimum.", regex: /.{1,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "text",
           values: "",
-          showQuestion: true
+          options: [],
         },
         {
           key: "com.rcs.question.personal.maritalStatus",
-          rules: { message: "8 characters minimum.", regex: /.{8,}/ },
-          followUpKey: "",
-          type: "text",
+          rules: { regex: null },
+          parentKey: "",
+          type: "Drop down",
           values: "",
-          showQuestion: true
+          options: ["Single", "Maried", "Widow"],
         },
         {
           key: "com.rcs.question.personal.religion",
-          rules: { message: "8 characters minimum.", regex: /.{1,}/ },
-          followUpKey: "",
+          rules: { regex: null },
+          parentKey: "",
           type: "text",
           values: "",
-          showQuestion: true
+          options: [],
         }
       ],
 
@@ -189,4 +209,15 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style>
+.form-row {
+  border: 1px solid #e2e2e2;
+  margin: 10px;
+  padding: 20px;
+  background: #f2f2f2;
+}
+.subrow {
+  margin: 5px;
+  padding: 5px;
+}
+</style>

@@ -4,12 +4,12 @@
     <div class="col-lg-12 row subrow">
       <div class="col-lg-2"><h4>Show if</h4></div>
       <div class="col-lg-3">
-        <h4>Parent Question id: {{wizardData.parentquestion}}</h4>
+        <h4>Parent Question id: {{wizardData.parentKey}}</h4>
       </div>
       <div class="col-lg-3">
         <select @change="updateData" class="form-control" name="" id="regex" v-model="rules.regex">
-          <option value="/^{expected}$/"> Equal</option>
-          <option value="/{expected}/">Contains</option>
+          <option value=/^{expected}$/> Equal</option>
+          <option value=/{expected}/>Contains</option>
         </select>
       </div>
       <div class="col-lg-3">
